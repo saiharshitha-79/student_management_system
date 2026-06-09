@@ -18,7 +18,7 @@ export default function Dashboard({ token }) {
   useEffect(() => {
     const fetchPrediction = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/ai/predict-performance/STU-1001', {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/ai/predict-performance/STU-1001`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         setPrediction(res.data)

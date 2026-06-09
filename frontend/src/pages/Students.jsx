@@ -12,7 +12,7 @@ export default function Students({ token }) {
 
   const fetchStudents = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/students', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/students`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       setStudents(res.data)
@@ -34,7 +34,7 @@ export default function Students({ token }) {
 
     setIsUploading(true)
     try {
-      const res = await axios.post('http://localhost:8000/upload-csv', formData, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/upload-csv`, formData, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -52,7 +52,7 @@ export default function Students({ token }) {
   const handleDelete = async (id) => {
     if (!confirm('Delete this student?')) return
     try {
-      await axios.delete(`http://localhost:8000/students/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/students/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       fetchStudents()
@@ -64,7 +64,7 @@ export default function Students({ token }) {
   const handleAddSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:8000/students', formData, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/students`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       })
       setShowModal(false)

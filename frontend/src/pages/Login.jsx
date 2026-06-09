@@ -13,12 +13,12 @@ export default function Login({ setToken }) {
     setError('')
     try {
       if (isRegistering) {
-        await axios.post('http://localhost:8000/register', { username, password, role: 'admin' })
+        await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/register`, { username, password, role: 'admin' })
         setIsRegistering(false)
         alert('Registration successful! Please login.')
         return
       }
-      const res = await axios.post('http://localhost:8000/login', { username, password })
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/login`, { username, password })
       localStorage.setItem('token', res.data.access_token)
       setToken(res.data.access_token)
     } catch (err) {

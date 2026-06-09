@@ -3,3 +3,4 @@ Flask-Cors
 SQLAlchemy
 PyJWT
 passlib[bcrypt]
+gunicorn==21.2.0
